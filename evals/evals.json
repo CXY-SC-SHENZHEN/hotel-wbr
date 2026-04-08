@@ -1,0 +1,59 @@
+{
+  "skill_name": "hotel-wbr",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "Generate the Hotels KPI scorecard for last week's WBR. Today is April 7 2026.",
+      "expected_output": "A Hotels Weekly Performance Callouts section with the correct date range (Mar 28 - Apr 3 2026), a highlight paragraph summarizing declared and generated revenue WoW movements, and three metric sections (Sessions, Redirects/Session, Revenue/Redirect) each with a RAG emoji, WoW% and YoY%, and bullet-point callouts backed by actual Databricks data.",
+      "files": [],
+      "assertions": [
+        {"id": "has_header", "text": "Output contains 'Hotels Weekly Performance Callouts' header"},
+        {"id": "has_correct_dates", "text": "Output references the correct report period (March 28 or 28 MAR)"},
+        {"id": "has_highlight", "text": "Output contains a HIGHLIGHT OF THE WEEK section"},
+        {"id": "has_declared_and_generated_revenue", "text": "Highlight mentions both declared revenue and generated revenue"},
+        {"id": "has_sessions_section", "text": "Output contains a Sessions metric section with WoW%"},
+        {"id": "has_redirects_session_section", "text": "Output contains a Redirects/Session metric section with WoW%"},
+        {"id": "has_revenue_redirect_section", "text": "Output contains a Revenue/Redirect metric section with WoW%"},
+        {"id": "has_rag_emoji", "text": "Output uses RAG status emojis (green/orange/red circle)"},
+        {"id": "has_traffic_source_callouts", "text": "Sessions section names specific traffic sources"},
+        {"id": "has_partner_ecpc_callouts", "text": "Revenue/Redirect section names specific partners"}
+      ]
+    },
+    {
+      "id": 1,
+      "prompt": "Write up the hotel section for WBR for the week of March 20-26 2026.",
+      "expected_output": "A Hotels Weekly Performance Callouts section for the period 20-26 MAR 2026 with correct metric movements matching approximately: Sessions -15.6% WoW, Redirects/Session +7.4% WoW, Revenue/Redirect ~0% WoW, and narrative callouts about traffic source drivers.",
+      "files": [],
+      "assertions": [
+        {"id": "has_header", "text": "Output contains 'Hotels Weekly Performance Callouts' header"},
+        {"id": "has_correct_dates", "text": "Output references the report period (20 MAR / March 20)"},
+        {"id": "has_highlight", "text": "Output contains a HIGHLIGHT OF THE WEEK section"},
+        {"id": "has_sessions_section", "text": "Output contains a Sessions metric section with WoW%"},
+        {"id": "has_redirects_session_section", "text": "Output contains a Redirects/Session metric section with WoW%"},
+        {"id": "has_revenue_redirect_section", "text": "Output contains a Revenue/Redirect metric section with WoW%"},
+        {"id": "sessions_wow_direction_negative", "text": "Sessions WoW is negative (should be around -15.6% for this week)"},
+        {"id": "has_rag_emoji", "text": "Output uses RAG status emojis"},
+        {"id": "has_traffic_source_callouts", "text": "Sessions section names specific traffic sources"},
+        {"id": "has_partner_ecpc_callouts", "text": "Revenue/Redirect section names specific partners"}
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Can you prepare the hotels WBR writeup? The reporting week is March 28 to April 3, 2026.",
+      "expected_output": "A complete Hotels Weekly Performance Callouts section with real computed numbers queried from Databricks, covering the Highlight of the Week and all three metric callout sections in proper WBR Confluence format.",
+      "files": [],
+      "assertions": [
+        {"id": "has_header", "text": "Output contains 'Hotels Weekly Performance Callouts' header"},
+        {"id": "has_correct_dates", "text": "Output references the report period (March 28 / 28 MAR and April 3)"},
+        {"id": "has_highlight", "text": "Output contains a HIGHLIGHT OF THE WEEK section"},
+        {"id": "has_declared_and_generated_revenue", "text": "Highlight mentions both declared revenue and generated revenue"},
+        {"id": "has_sessions_section", "text": "Output contains a Sessions metric section with WoW%"},
+        {"id": "has_redirects_session_section", "text": "Output contains a Redirects/Session metric section with WoW%"},
+        {"id": "has_revenue_redirect_section", "text": "Output contains a Revenue/Redirect metric section with WoW%"},
+        {"id": "has_rag_emoji", "text": "Output uses RAG status emojis"},
+        {"id": "has_traffic_source_callouts", "text": "Sessions section names specific traffic sources"},
+        {"id": "has_partner_ecpc_callouts", "text": "Revenue/Redirect section names specific partners"}
+      ]
+    }
+  ]
+}
