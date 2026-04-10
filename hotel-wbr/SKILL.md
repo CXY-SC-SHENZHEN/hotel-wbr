@@ -130,13 +130,13 @@ Use the following SQL to get generated revenue and per-partner eCPC:
 ```sql
 SELECT
   case when website_id in ('h_hc') then 'h_h1' else website_id end as partner_id,
-  SUM(CASE WHEN dt BETWEEN '[week_start]' AND '[week_end]' THEN estimated_revenue_gbp ELSE 0 END) AS gen_rev_this_week,
-  SUM(CASE WHEN dt BETWEEN '[prev_week_start]' AND '[prev_week_end]' THEN estimated_revenue_gbp ELSE 0 END) AS gen_rev_prev_week,
+  SUM(CASE WHEN dt BETWEEN '[week_start]' AND '[week_end]' THEN estimated_revenue_gbp_adjusted ELSE 0 END) AS gen_rev_this_week,
+  SUM(CASE WHEN dt BETWEEN '[prev_week_start]' AND '[prev_week_end]' THEN estimated_revenue_gbp_adjusted ELSE 0 END) AS gen_rev_prev_week,
   SUM(CASE WHEN dt BETWEEN '[week_start]' AND '[week_end]' THEN redirect_count ELSE 0 END) AS redirects_this_week,
   SUM(CASE WHEN dt BETWEEN '[prev_week_start]' AND '[prev_week_end]' THEN redirect_count ELSE 0 END) AS redirects_prev_week
 FROM prod_trusted_gold.hotel_core_business_metrics.w_hotel_summary_aggregated
 WHERE dt >= '[prev_week_start]'
-  AND estimated_revenue_gbp <= 100000
+  AND estimated_revenue_gbp_adjusted <= 100000
 GROUP BY 1
 ORDER BY gen_rev_this_week DESC
 LIMIT 20
@@ -144,10 +144,10 @@ LIMIT 20
 
 Also run a **YoY query** for total generated revenue (to compute generated eCPC YoY):
 ```sql
-SELECT SUM(estimated_revenue_gbp) AS gen_rev_yoy
+SELECT SUM(estimated_revenue_gbp_adjusted) AS gen_rev_yoy
 FROM prod_trusted_gold.hotel_core_business_metrics.w_hotel_summary_aggregated
 WHERE dt BETWEEN '[yoy_start]' AND '[yoy_end]'
-  AND estimated_revenue_gbp <= 100000
+  AND estimated_revenue_gbp_adjusted <= 100000
 ```
 
 Compute per-partner eCPC (gen_rev / redirects) WoW change. Key partner IDs: Booking.com = `h_bc`, Agoda = `h_ad`, Trip = `h_ct`, Expedia = `h_xp`, Hotels.com = `h_h1` (also `h_hc`, treat as same). Highlight partners where eCPC moved >5% WoW.
